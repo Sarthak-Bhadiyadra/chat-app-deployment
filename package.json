@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node build/start.js",
-    "build":"npx tsc"
+    "start": "prisma generate && prisma db push && npm i @prisma/client && node build/start.js",
+    "build": "npx tsc"
   },
   "prisma": {
     "seed": "ts-node ./Prisma/Seeders/index.ts",
