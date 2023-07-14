@@ -21,7 +21,6 @@ const Chats_1 = require("./Routes/Chats"); // Importing the router for handling 
 const db_client_1 = require("./Utils/Database/db.client"); // Importing the database client
 // import { router as loginRouter } from "./Routes/Login";
 const cors_1 = __importDefault(require("cors"));
-const path_1 = __importDefault(require("path"));
 const jwt = require("jsonwebtoken");
 dotenv_1.default.config(); // Loading environment variables from .env file
 const app = (0, express_1.default)(); // Creating an instance of the Express application
@@ -32,23 +31,9 @@ app.use(bp.urlencoded({ extended: true }));
 app.use("/", User_1.router); // Registering the router for handling routes
 app.use("/users/:user_id", Chats_1.router); // Registering the router for handling routes
 // app.use("/login", loginRouter);
-//--------------------deployment---------------------
-const __dirname1 = path_1.default.resolve();
-const mode = process.env.NODE_ENV;
-if (mode === null || mode === void 0 ? void 0 : mode.includes("production")) {
-    console.log("Here");
-    app.use(express_1.default.static(path_1.default.join(__dirname1, "../", "/frontend/build")));
-    console.log('path.join(__dirname1, "../", "/frontend/build"): ', path_1.default.join(__dirname1, "../", "/frontend/build"));
-    app.get("*", (req, res) => {
-        res.sendFile(path_1.default.resolve(__dirname1, "../", "frontend", "build", "index.html"));
-    });
-}
-else {
-    console.log("Not here");
-    app.get("/", (req, res) => {
-        res.send("API is Running Successfully");
-    });
-}
+app.get("/", (req, res) => {
+    res.send("API is Running Successfully");
+});
 // Starting the server
 const server = app.listen(port, () => __awaiter(void 0, void 0, void 0, function* () {
     yield initializeDataSources(); // Initializing data sources before starting the server

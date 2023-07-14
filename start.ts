@@ -25,28 +25,9 @@ app.use("/", userRouter); // Registering the router for handling routes
 app.use("/users/:user_id", chatRouter); // Registering the router for handling routes
 // app.use("/login", loginRouter);
 
-//--------------------deployment---------------------
-
-const __dirname1 = path.resolve();
-const mode = process.env.NODE_ENV;
-if (mode?.includes("production")) {
-  console.log("Here");
-  app.use(express.static(path.join(__dirname1, "../", "/frontend/build")));
-  console.log(
-    'path.join(__dirname1, "../", "/frontend/build"): ',
-    path.join(__dirname1, "../", "/frontend/build")
-  );
-  app.get("*", (req, res) => {
-    res.sendFile(
-      path.resolve(__dirname1, "../", "frontend", "build", "index.html")
-    );
-  });
-} else {
-  console.log("Not here");
-  app.get("/", (req, res) => {
-    res.send("API is Running Successfully");
-  });
-}
+app.get("/", (req, res) => {
+  res.send("API is Running Successfully");
+});
 
 // Starting the server
 const server = app.listen(port, async () => {
