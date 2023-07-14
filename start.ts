@@ -37,7 +37,7 @@ const server = app.listen(port, async () => {
 
 const io = require("socket.io")(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: "https://chatting-with-sarthak.netlify.app/",
   },
   pingTimeOut: 60000,
 });
